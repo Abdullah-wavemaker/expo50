@@ -1,0 +1,1 @@
+{"version":3,"names":["BaseProps","WmSkeletonProps"],"sources":["skeleton.props.ts"],"sourcesContent":["import { BaseProps } from '@wavemaker/app-rn-runtime/core/base.component';\nexport default class WmSkeletonProps extends BaseProps {\n}"],"mappings":"AAAA,SAASA,SAAS,QAAQ,+CAA+C;AACzE,eAAe,MAAMC,eAAe,SAASD,SAAS,CAAC"}

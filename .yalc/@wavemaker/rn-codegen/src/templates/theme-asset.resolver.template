@@ -1,0 +1,10 @@
+
+const resourceStore = {
+    {{#each resources}}
+    '{{this}}' : () => require('{{../path}}{{this}}'),
+    {{/each}}
+};
+
+export default {
+  resolve: (path) => (resourceStore[path] && resourceStore[path]())
+};

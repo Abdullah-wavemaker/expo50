@@ -1,0 +1,1 @@
+{"version":3,"file":"form-footer.styledef.js","sourceRoot":"","sources":["../../../../../../src/theme/components/data/form/form-footer.styledef.ts"],"names":[],"mappings":";;AAEA,kBAAe;IACX,YAAY,EAAE,GAAG,EAAE,CAAC,CAAC,CAAC;YAClB,SAAS,EAAE,kBAAkB;YAC7B,eAAe,EAAE,sBAAsB;YACvC,mBAAmB,EAAE,EAAE;YACvB,KAAK,EAAE;gBACH,cAAc,EAAE,kBAAkB;aACrC;SACJ,CAAC,CAAC;CACY,CAAC"}

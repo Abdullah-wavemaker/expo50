@@ -1,0 +1,1 @@
+{"version":3,"names":[],"sources":["content.props.ts"],"sourcesContent":["import { BaseProps } from '@wavemaker/app-rn-runtime/core/base.component';\n\nexport default interface WmContentProps extends BaseProps {\n  children: any[]\n}"],"mappings":""}

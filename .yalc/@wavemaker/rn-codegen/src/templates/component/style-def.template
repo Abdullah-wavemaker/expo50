@@ -1,0 +1,18 @@
+@import url('{{basePath}}variables.less');
+{{#each styledefs}}
+
+
+{{#ifNotEmpty this.document this}}
+/**********************************************************************************
+{{this.document}}
+***********************************************************************************/
+{{/ifNotEmpty}}
+{{this.className}} {
+    {{#each style}}
+    {{@key}}: {{this}};
+    {{/each}}
+}
+{{/each}}
+
+@import (optional) url('{{basePath}}../custom/{{path}}');
+@import (optional) url('{{basePath}}../custom/os/{{path}}');

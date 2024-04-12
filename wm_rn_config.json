@@ -1,0 +1,37 @@
+{
+    "author": {
+        "name": "Mohammed Abdullah Khan",
+        "href": "",
+        "email": "abdullah.mohammed@wavemaker.com"
+    },
+    "buildMode": "DEV",
+    "icon": {
+        "src": "resources/assets/icon.png",
+        "width": 1024,
+        "height": 1024
+    },
+    "id": "com.unknown",
+    "name": "unknown",
+    "platformConfigs": [],
+    "plugins": [],
+    "preferences": {
+        "enableHermes": true
+    },
+    "serverPath": "https://www.wavemakeronline.com/run-7m22xsb18q/unknown_master/",
+    "splash": {
+        "src": "resources/assets/splash.png",
+        "width": 1284,
+        "height": 2778,
+        "animationSrc": ""
+    },
+    "version": "0.0.1",
+    "customPlugins": [],
+    "activePlugins": {},
+    "sslPinning": {
+        "enabled": false,
+        "domains": {}
+    },
+    "baseUrl": "{{DEVELOPMENT_URL}}",
+    "enableWebPreview": true,
+    "loader": "skeleton"
+}

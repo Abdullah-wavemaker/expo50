@@ -1,0 +1,30 @@
+{{#if lazyload}}
+import { register } from 'react-native-bundle-splitter';
+{{else}}
+{{#each pageConfigs}}
+import {{name}}Component from "./{{name}}/{{name}}.component";
+{{/each}}
+{{/if}}
+
+const components = {
+    {{#each pageConfigs}}
+    '{{name}}': {
+        {{#if ../lazyload}}
+        type: register({ loader: () => import('./{{name}}/{{name}}.component') }),
+        {{else}}
+        type: {{name}}Component,
+        {{/if}}
+        name: '{{name}}Component'
+    },
+    {{/each}}
+};
+
+const configs = {{{pageConfigsStr}}};
+
+configs.forEach(p => {
+    const component = components[p.name];
+    p.component = component.type;
+    p.componentName = component.name;
+});
+
+export default configs;

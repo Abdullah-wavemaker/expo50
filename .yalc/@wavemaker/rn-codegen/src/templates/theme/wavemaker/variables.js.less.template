@@ -1,0 +1,8 @@
+@import 'variables.less';
+.defineVariables();
+
+.themeVariables {
+    {{#each variables}}
+    {{@key}}: {{{this}}};
+    {{/each}}
+};

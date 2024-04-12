@@ -1,0 +1,218 @@
+import { ModelVariable  } from '@wavemaker/app-rn-runtime/variables/model-variable';
+import { ServiceVariable  } from '@wavemaker/app-rn-runtime/variables/service-variable';
+import { LiveVariable  } from '@wavemaker/app-rn-runtime/variables/live-variable';
+import { NavigationAction  } from '@wavemaker/app-rn-runtime/actions/navigation-action';
+import { TimerAction  } from '@wavemaker/app-rn-runtime/actions/timer-action';
+import { NotificationAction  } from '@wavemaker/app-rn-runtime/actions/notification-action';
+import { DeviceVariable  } from '@wavemaker/app-rn-runtime/variables/device-variable';
+import { LoginAction  } from '@wavemaker/app-rn-runtime/actions/login-action';
+import { LogoutAction  } from '@wavemaker/app-rn-runtime/actions/logout-action';
+{{#ifEquals scope 'App' this}}
+import { getEntityPropertyMap, getEntityRelatedTables } from '../metadata/entities/entity-provider';
+{{/ifEquals}}
+{{#ifEquals addEntityProvider true this}}
+import { getEntityPropertyMap, getEntityRelatedTables } from '../../../metadata/entities/entity-provider';
+{{/ifEquals}}
+import WmPartialContainer from '@wavemaker/app-rn-runtime/components/page/partial-container/partial-container.component';
+import React from 'react';
+
+{{#each imports}}
+{{{this}}};
+{{/each}}
+
+export default ({{scope}}) => {
+    return {
+        {{#each context}}
+        {{@key}} : {
+            {{#each this}}
+            {{name}}: new {{classname}}({
+                name: '{{name}}',
+                _context: {{../../scope}},
+                {{#ifNotEmpty serviceType this}}
+                serviceType: '{{serviceType}}',
+                {{/ifNotEmpty}}
+                {{#ifNotEmpty operation this}}
+                operation: {{{stringify operation}}},
+                {{/ifNotEmpty}}
+                {{#ifNotEmpty service this}}
+                service: {{{stringify service}}},
+                {{/ifNotEmpty}}
+                {{#ifNotEmpty maxResults this}}
+                maxResults: '{{maxResults}}',
+                {{/ifNotEmpty}}
+                {{#ifNotEmpty operationId this}}
+                operationId: '{{operationId}}',
+                {{/ifNotEmpty}}
+                {{#ifEquals name 'loggedInUser' this}}
+                paramProvider: () => App.appConfig.loggedInUser,
+                {{else}}
+                paramProvider: () => (
+                  {{#ifEquals classname 'ModelVariable' this}}
+                        {{{stringify params}}}
+                        {{else}}
+                  {{#ifEquals classname 'ServiceVariable' this}}
+                        {{{stringify params}}}
+                    {{else}}
+                  {{#ifEquals classname 'LiveVariable' this}}
+                        {{{stringify params}}}
+                    {{else}}
+                    {
+                        {{#each params}}
+                        '{{@key}}': {{{quoteIfString this}}},
+                        {{/each}}
+                    }
+                    {{/ifEquals}}
+                    {{/ifEquals}}
+                    {{/ifEquals}}
+                ),
+                {{/ifEquals}}
+                {{#ifNotEmpty filters this}}
+                filterProvider: () => (
+                    {
+                        {{#each filters}}
+                        '{{@key}}': {{{quoteIfString this}}},
+                        {{/each}}
+                    }
+                ),
+                {{/ifNotEmpty}}
+                {{#ifEquals classname 'ServiceVariable' this}}
+                    {{#if ../../isPrefabApp}}
+                        baseUrl: {{../../scope}}.baseUrl,
+                    {{else}}
+                        baseUrl: {{../../scope}}.baseUrl + '/services',
+                    {{/if}}
+                {{/ifEquals}}
+                {{#ifEquals classname 'NavigationAction' this}}
+                appConfig: {{../../scope}}.appConfig,
+                {{/ifEquals}}
+                {{#ifEquals classname 'LoginAction' this}}
+                baseURL: {{../../scope}}.appConfig.url,
+                securityService: () => {{../../scope}}.appConfig.SecurityService,
+                useDefaultSuccessHandler: {{useDefaultSuccessHandler}},
+                {{/ifEquals}}
+                {{#ifEquals classname 'LogoutAction' this}}
+                baseURL: {{../../scope}}.appConfig.url,
+                redirectTo: '{{redirectTo}}',
+                useDefaultSuccessHandler: {{useDefaultSuccessHandler}},
+                securityService: () => {{../../scope}}.appConfig.SecurityService,
+                {{/ifEquals}}
+                {{#ifEquals classname 'TimerAction' this}}
+                repeating: {{{stringify repeating}}},
+                delay: {{{stringify delay}}},
+                {{#if onTimerFire}}
+                onSuccess: (variable, data, options) => {
+                    {{{onTimerFire}}}
+                },
+                {{/if}}
+                {{/ifEquals}}
+                {{#ifEquals classname 'NotificationAction' this}}
+                {{#if showDialog}}
+                showDialog: (options)  => {
+                    {{{showDialog}}}
+                },
+                {{/if}}
+                {{#if partialContent}}
+                partialContent: React.createElement(WmPartialContainer, {...{{{stringify partialContent}}}, parentWatcher: {{../../scope}}.watcher}),
+                {{/if}}
+                onOk: (variable, data, options) => {
+                    {{{onOk}}}
+                },
+                {{#ifEquals operation 'confirm' this}}
+                onCancel: (variable, data, options) => {
+                    {{{onCancel}}}
+                },
+                {{/ifEquals}}
+                {{#ifEquals operation 'toast' this}}
+                {{#ifEquals ../../scope 'App' this}}
+                 toasterService: () => {{../../scope}}.appConfig.currentPage.toaster,
+                 {{else}}
+                 toasterService: () => {{../../scope}}.toaster,
+                 {{/ifEquals}}
+                {{/ifEquals}}
+                onClose: (variable, data, options) => {
+                    {{{onClose}}}
+                },
+                {{/ifEquals}}
+                {{#ifEquals classname 'ServiceVariable' this}}
+                    getServiceInfo: () => {{../../scope}}.serviceDefinitions['{{operationId}}']?.wmServiceOperationInfo,
+                    {{#if onBeforeUpdate}}
+                    onBeforeUpdate: (variable, inputData, options) => {
+                        return {{{onBeforeUpdate}}}
+                    },
+                    {{/if}}
+                {{/ifEquals}}
+                {{#if onSuccess}}
+                onSuccess: (variable, data, options) => {
+                    {{{onSuccess}}}
+                },
+                {{/if}}
+                {{#if onError}}
+                onError: (variable, data, options) =>  {
+                    {{{onError}}}
+                },
+                {{/if}}
+                {{#if onCanUpdate}}
+                onCanUpdate: (variable, data, options) => {
+                    {{{onCanUpdate}}}
+                },
+                {{/if}}
+                {{#if onResult}}
+                onResult: (variable, data, options) => {
+                    {{{onResult}}}
+                },
+                {{/if}}
+                {{#if onBeforeDatasetReady}}
+                onBeforeDatasetReady: (variable, data, options) => {
+                    return {{{onBeforeDatasetReady}}}
+                },
+                {{/if}}
+                {{#if inFlightBehavior}}
+                inFlightBehavior: {{{stringify inFlightBehavior}}},
+                {{/if}}
+                {{#ifEquals isList true this}}
+                isList: {{isList}},
+                {{/ifEquals}}
+                {{#ifEquals twoWayBinding true this}}
+                twoWayBinding: {{twoWayBinding}},
+                {{/ifEquals}}
+                {{#if spinnerContext}}
+                spinnerContext: '{{spinnerContext}}',
+                {{/if}}
+                {{#if spinnerMessage}}
+                spinnerMessage: '{{spinnerMessage}}',
+                {{/if}}
+                {{#ifEquals classname 'LiveVariable' this}}
+                type: '{{type}}',
+                {{#ifEquals autoUpdate true this}}
+                autoUpdate: {{autoUpdate}},
+                {{/ifEquals}}
+                {{#if onBeforeUpdate}}
+                {{#ifEquals operation "read" this}}
+                onBeforeUpdate: (variable, dataFilter, options) => {
+                    return {{{onBeforeUpdate}}}
+                },
+                {{else}}
+                onBeforeUpdate: (variable, inputData, options) => {
+                    return {{{onBeforeUpdate}}}
+                },
+                {{/ifEquals}}
+                {{/if}}
+                liveSource: '{{liveSource}}',
+                baseUrl: {{../../scope}}.baseUrl,
+                orderBy: '{{orderBy}}',
+                propertiesMap: getEntityPropertyMap('{{liveSource}}', '{{type}}'),
+                relatedTables: getEntityRelatedTables('{{liveSource}}', '{{type}}'),
+                category: '{{category}}',
+                tableName: '{{tableName}}',
+                tableType: '{{tableType}}',
+                {{#ifNotEmpty filterExpressions this}}
+                filterExpressions: {{{stringify filterExpressions}}}
+                {{/ifNotEmpty}}
+                {{/ifEquals}}
+
+            }),
+            {{/each}}
+        },
+        {{/each}}
+    };
+};

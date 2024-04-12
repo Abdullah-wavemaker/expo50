@@ -1,0 +1,195 @@
+{
+  "name": "@wavemaker/app-rn-runtime",
+  "version": "1.0.0-dev",
+  "description": "''",
+  "main": "index",
+  "module": "index",
+  "types": "lib/typescript/index.d.ts",
+  "react-native": "src/index",
+  "source": "src/index",
+  "exports": {
+    "./": "./"
+  },
+  "scripts": {
+    "test": "jest -u --coverage",
+    "test:theme": "jest \"test/styles/theme.spec.ts\"",
+    "typescript": "tsc --noEmit",
+    "copy-resources": "mkdir -p ./dist && cp -r ./lib/module ./dist && cp ./package.json ./dist/module",
+    "lint": "eslint \"**/*.{js,ts,tsx}\"",
+    "build": "bob build && node ./scripts/build.js post-build",
+    "release": "release-it",
+    "example": "yarn --cwd example",
+    "pods": "cd example && pod-install --quiet",
+    "bootstrap": "yarn example && yarn && yarn pods",
+    "watch": "npm-watch build"
+  },
+  "keywords": [
+    "react-native",
+    "ios",
+    "android"
+  ],
+  "repository": "http://wavemaker.com",
+  "author": "WaveMaker <no-reply@wavemaker.com> (http://wavemaker.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "http://wavemaker.com/issues"
+  },
+  "homepage": "http://wavemaker.com#readme",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "dependencies": {
+    "@expo/vector-icons": "13.0.0",
+    "@react-native-async-storage/async-storage": "1.18.2",
+    "@react-native-community/datetimepicker": "7.2.0",
+    "@react-native-community/netinfo": "9.3.10",
+    "@react-native-community/slider": "4.4.2",
+    "@react-native-masked-view/masked-view": "0.2.9",
+    "@react-navigation/drawer": "6.6.3",
+    "@react-navigation/native": "6.1.7",
+    "@react-navigation/stack": "^6.3.7",
+    "@types/lodash-es": "^4.17.6",
+    "@wavemaker/variables": "file:.yalc/@wavemaker/variables",
+    "axios": "^1.4.0",
+    "color": "4.2.3",
+    "cross-env": "^5.2.0",
+    "css-mediaquery": "^0.1.2",
+    "d3-shape": "^3.2.0",
+    "expo-application": "^5.4.0",
+    "expo-font": "11.4.0",
+    "expo-linear-gradient": "12.3.0",
+    "expo-modules-core": "~1.1.0",
+    "fast-xml-parser": "^3.17.6",
+    "imask": "^7.5.0",
+    "lodash-es": "^4.17.21",
+    "lottie-react-native": "5.1.6",
+    "moment": "^2.29.1",
+    "react-lottie-player": "1.5.4",
+    "react-native-animatable": "^1.3.3",
+    "react-native-circular-progress": "1.3.9",
+    "react-native-logs": "^4.0.1",
+    "react-native-paper": "^4.11.1",
+    "react-native-paper-dates": "^0.8.0",
+    "react-native-reanimated": "3.3.0",
+    "react-native-screens": "3.22.0",
+    "react-native-size-scaling": "^0.5.1",
+    "react-native-snap-carousel": "3.9.1",
+    "react-native-svg": "13.9.0",
+    "react-native-web": "0.18.12",
+    "react-native-webview": "13.2.2",
+    "react-xml-parser": "^1.1.8",
+    "xml2js": "^0.4.23"
+  },
+  "jest": {
+    "preset": "react-native",
+    "testRegex": "(test/.*|(\\.|/)(test|spec))\\.[t]sx?$",
+    "setupFiles": [
+      "./test/jest.setup.js"
+    ],
+    "setupFilesAfterEnv": [
+      "@testing-library/jest-native/extend-expect"
+    ],
+    "coverageDirectory": "./dist/reports/coverage",
+    "transform": {
+      "^.+\\.(js|jsx|mjs)$": "<rootDir>/node_modules/babel-jest"
+    },
+    "moduleNameMapper": {
+      "^lodash-es$": "lodash",
+      "^@wavemaker/app-rn-runtime/(.*)$": "<rootDir>/src/$1"
+    },
+    "modulePathIgnorePatterns": [
+      "<rootDir>/node_modules/(?!lodash-es)",
+      "<rootDir>/example/node_modules",
+      "<rootDir>/lib/"
+    ],
+    "reporters": [
+      "default",
+      [
+        "<rootDir>/node_modules/jest-html-reporter",
+        {
+          "pageTitle": "@wavemaker/app-rn-runtime Test Report",
+          "outputPath": "<rootDir>/dist/reports/all-tests.html"
+        }
+      ]
+    ]
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "release-it": {
+    "git": {
+      "commitMessage": "chore: release ${version}",
+      "tagName": "v${version}"
+    },
+    "npm": {
+      "publish": true
+    },
+    "github": {
+      "release": true
+    },
+    "plugins": {
+      "@release-it/conventional-changelog": {
+        "preset": "angular"
+      }
+    }
+  },
+  "eslintConfig": {
+    "root": true,
+    "extends": [
+      "@react-native-community",
+      "prettier"
+    ],
+    "rules": {
+      "prettier/prettier": [
+        "error",
+        {
+          "quoteProps": "consistent",
+          "singleQuote": true,
+          "tabWidth": 2,
+          "trailingComma": "es5",
+          "useTabs": false
+        }
+      ]
+    }
+  },
+  "eslintIgnore": [
+    "node_modules/",
+    "lib/"
+  ],
+  "prettier": {
+    "quoteProps": "consistent",
+    "singleQuote": true,
+    "tabWidth": 2,
+    "trailingComma": "es5",
+    "useTabs": false
+  },
+  "react-native-builder-bob": {
+    "source": "src",
+    "output": "lib",
+    "targets": [
+      "module",
+      [
+        "typescript",
+        {
+          "project": "tsconfig.build.json"
+        }
+      ]
+    ]
+  },
+  "watch": {
+    "build": {
+      "patterns": [
+        "src"
+      ],
+      "extensions": "ts,tsx",
+      "ignore": "src/vendor/external.min.js",
+      "quiet": true,
+      "legacyWatch": true,
+      "delay": 2500,
+      "runOnChangeOnly": true
+    }
+  },
+  "yalcSig": "9575ada7195eb2c67b87d08d54a618ff"
+}

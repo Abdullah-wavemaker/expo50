@@ -1,0 +1,17 @@
+{
+  "version": "v1",
+  "packages": {
+    "@wavemaker/variables": {
+      "signature": "65e854ff25353b4f80c1b48867ef21e0",
+      "file": true
+    },
+    "@wavemaker/app-rn-runtime": {
+      "signature": "9575ada7195eb2c67b87d08d54a618ff",
+      "file": true
+    },
+    "@wavemaker/rn-codegen": {
+      "signature": "50dac396e7dd366a6f50c8ada1f14cf5",
+      "file": true
+    }
+  }
+}

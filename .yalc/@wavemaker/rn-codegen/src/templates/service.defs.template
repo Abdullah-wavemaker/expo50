@@ -1,0 +1,3 @@
+const config = {{{serviceDefs}}};
+
+export default (name) => config.serviceDefs[name];

@@ -1,0 +1,10 @@
+@import (optional) '../custom/variables.less';
+.defineVariables() {
+{{#each variables}}
+{{#if md}}
+@{{@key}}: if(isdefined(@_{{@key}}), @_{{@key}}, if(isdefined({{md}}), {{mdValue}}, {{dValue}}));
+{{else}}
+@{{@key}}: if(isdefined(@_{{@key}}), @_{{@key}}, {{dValue}});
+{{/if}}
+{{/each}}
+}

@@ -1,0 +1,1 @@
+{"version":3,"file":"panel-footer.styledef.js","sourceRoot":"","sources":["../../../../../../src/theme/components/container/panel/panel-footer.styledef.ts"],"names":[],"mappings":";;AAEA,kBAAe;IACX,YAAY,EAAE,GAAG,EAAE,CAAC,CAAC,CAAC;YAClB,SAAS,EAAE,mBAAmB;YAC9B,eAAe,EAAE,uBAAuB;YACxC,mBAAmB,EAAE,mBAAmB;YACxC,KAAK,EAAE;gBACH,kBAAkB,EAAE,mBAAmB;aAC1C;SACJ,CAAC,CAAC;CACY,CAAC"}

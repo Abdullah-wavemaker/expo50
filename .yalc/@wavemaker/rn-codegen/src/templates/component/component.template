@@ -1,0 +1,133 @@
+import React from 'react';
+
+import { ScrollView } from 'react-native';
+
+import { AssetProvider } from '@wavemaker/app-rn-runtime/core/asset.provider';
+import Base{{typeLabel}} from '@wavemaker/app-rn-runtime/runtime/base-{{lType}}.component';
+import { useWatcher } from '@wavemaker/app-rn-runtime/runtime/watcher';
+import { WmMemo } from '@wavemaker/app-rn-runtime/runtime/memo.component';
+import { ThemeProvider } from '@wavemaker/app-rn-runtime/styles/theme';
+{{#each eagerImports}}
+import {{name}} from '{{from}}';
+{{/each}}
+{{#ifEquals lType 'prefab' this}}
+import { PartialServiceImpl } from '@wavemaker/app-rn-runtime/runtime/services/partial.service';
+
+import defaultProps from './{{name}}.props';
+import partialConfig from '../../partials/partial-config';
+{{/ifEquals}}
+import { isWebPreviewMode } from '@wavemaker/app-rn-runtime/core/utils';
+
+import { merge, get as _get } from 'lodash';
+import ResourceResolver from '../../resolve/resource.resolver';
+import add{{typeLabel}}Script from './{{name}}.script';
+import styles from './{{name}}.style';
+import getVariables from './{{name}}.variables';
+
+const FragmentContext = React.createContext();
+
+{{#each lazyImports}}
+const {{name}} = React.lazy(() => import('{{from}}'));
+{{/each}}
+
+{{#each components}}
+const {{@key}} = {{{this}}};
+
+{{/each}}
+
+export default class {{name}}{{typeLabel}} extends Base{{typeLabel}} {
+
+  {{#ifEquals lType 'prefab' this}}
+    {{#each dynamicPrefabProps}}
+        {{@key}};
+    {{/each}}
+  {{/ifEquals}}
+
+  components;
+
+  constructor(props) {
+    {{#ifEquals lType 'prefab' this}}
+    super(props, defaultProps, new PartialServiceImpl(partialConfig));
+    {{else}}
+    super(props);
+    {{/ifEquals}}
+    {{#ifEquals lType 'partial' this}}
+    this.pageParams = this.state.props;
+    {{/ifEquals}}
+    const _this = this.proxy;
+    this.theme = (props.themeToUse || this.appConfig.theme);
+    const styleOverrides = this.theme.getStyle(props.classname);
+    this.theme = this.theme.$new('{{name}}-styles', styles);
+    if (styleOverrides) {
+      this.theme = this.theme.$new('{{name}}-styleOverrides', styleOverrides);
+    }
+  }
+
+  {{#ifEquals lType 'prefab' this}}
+    evalDynamicProps() {
+      const _this = this.proxy;
+      {{#each dynamicPrefabProps}}
+      _this.setPropDefault('{{@key}}', {{{this}}});
+      {{/each}}
+    }
+  {{/ifEquals}}
+
+  init() {
+    const data = getVariables(this.proxy);
+    this.fragmentVariables = data.Variables;
+    this.fragmentActions = data.Actions;
+    this.Variables = Object.assign(this.Variables, data.Variables);
+    this.Actions = Object.assign(this.Actions, data.Actions);
+    this.startUpVariables = [{{#each startUpVariables}}'{{this}}',{{/each}}];
+    this.startUpActions = [{{#each startUpActions}}'{{this}}',{{/each}}];
+    this.autoUpdateVariables = [{{#each autoUpdateVariables}}'{{this}}',{{/each}}];
+    add{{typeLabel}}Script(this.App, this.proxy);
+  }
+  
+  provideAsset = (path) => this.handleUrl(path);
+
+  componentDidMount() {
+    {{#ifEquals lType 'prefab' this}}
+      {{#if profile.useLocalMetadata}}
+      import('../../../service-definitions.json')
+      .then(mod => mod.default?.serviceDefs)
+      {{else}}
+      this.getServiceDefinitions()
+      {{/if}}
+      .then((defs) => {
+        this.serviceDefinitions = defs;
+        this.init();
+        super.componentDidMount();
+        super.onFragmentReady();
+      });
+    {{else}}
+      this.init();
+      super.componentDidMount();
+      super.onFragmentReady();
+    {{/ifEquals}}
+  }
+
+  handleUrl(url) {
+    return this.App.handleUrl(url) ||
+      ResourceResolver.resolve(url, this.resourceBaseUrl) ||
+      super.handleUrl(url);
+  }
+
+  {{#ifEquals lType 'page' this}}
+  renderPage() {
+  {{/ifEquals}}
+  {{#ifEquals lType 'prefab' this}}
+  renderPrefab() {
+  this.evalDynamicProps();
+  {{/ifEquals}}
+  {{#ifEquals lType 'partial' this}}
+  renderPartial() {
+  {{/ifEquals}}
+    const fragment = this.proxy;
+    return (<FragmentContext.Provider value={this.proxy}>
+      <AssetProvider value={this.provideAsset}>
+        {{{markup}}}
+      </AssetProvider>
+    </FragmentContext.Provider>);
+  }
+}

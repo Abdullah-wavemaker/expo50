@@ -1,0 +1,37 @@
+import BASE_THEME from '@wavemaker/app-rn-runtime/styles/theme';
+import { DEFAULT_CLASS as DATE_TIME_DEFAUlT_CLASS } from '../datetime/datetime.styles';
+import { Platform } from 'react-native';
+export const DEFAULT_CLASS = 'app-date';
+BASE_THEME.registerStyle((themeVariables, addStyle) => {
+  addStyle(DEFAULT_CLASS, DATE_TIME_DEFAUlT_CLASS, {});
+  addStyle(DEFAULT_CLASS + '-disabled', '', {
+    root: {
+      backgroundColor: themeVariables.inputDisabledBgColor
+    }
+  });
+  addStyle(DEFAULT_CLASS + '-rtl', '', Platform.OS == "web" ? {
+    clearIcon: {
+      root: {
+        marginLeft: 4,
+        marginRight: 0
+      }
+    }
+  } : {});
+  addStyle(DEFAULT_CLASS + '-with-label', '', {
+    root: {
+      minHeight: 48,
+      paddingVertical: 16
+    },
+    floatingLabel: {
+      position: 'absolute',
+      top: 12,
+      left: 16,
+      fontSize: 14,
+      color: themeVariables.floatingLabelColor
+    },
+    activeFloatingLabel: {
+      color: themeVariables.activeFloatingLabelColor
+    }
+  });
+});
+//# sourceMappingURL=date.styles.js.map

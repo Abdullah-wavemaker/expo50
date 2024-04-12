@@ -1,0 +1,14 @@
+export default {
+    baseFont: '{{baseFont}}',
+    fonts : [
+{{#each fonts}}
+        {
+            name: '{{name}}',
+            path: require('{{path}}'),
+            {{#if stylePath}}
+            csspath: require('{{stylePath}}')
+            {{/if}}
+        },
+{{/each}}
+    ]
+};

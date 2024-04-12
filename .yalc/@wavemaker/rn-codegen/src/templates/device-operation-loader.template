@@ -1,0 +1,40 @@
+{{#each servicesConfig}}
+import { {{name}}Service } from "@wavemaker/app-rn-runtime/runtime/services/device/{{filePath}}-service";
+{{/each}}
+
+{{#each pluginOperationConfig}}
+import { {{method}} } from "@wavemaker/app-rn-runtime/variables/device/{{service}}/{{filename}}.operation";
+{{/each}}
+
+{{#each imports}}
+import {{name}} from "@wavemaker/app-rn-runtime/runtime/services/{{filename}}";
+{{/each}}
+
+import OperationProvider from '@wavemaker/app-rn-runtime/variables/device/operation.provider';
+
+{{#each servicesConfig}}
+const get{{name}}Service = () => {
+    return new {{name}}Service({{servicesStr}});
+}
+{{/each}}
+
+export const initialize = () => {
+    {{#each servicesConfig}}
+        const {{name}}Service = get{{name}}Service();
+    {{/each}}
+
+    const data = {'appVersion': '{{appVersion}}'};
+
+    {{#each pluginOperationConfig}}
+    {{#ifEquals method 'AppInfoOperation' this}}
+        OperationProvider.set('{{service}}.{{operation}}', new {{method}}(data));
+    {{else}}
+    {{#ifEquals hasparams true this}}
+        OperationProvider.set('{{service}}.{{operation}}', new {{method}}({{type}}Service));
+    {{else}}
+        OperationProvider.set('{{service}}.{{operation}}', new {{method}}());
+    {{/ifEquals}}
+    {{/ifEquals}}
+
+    {{/each}}
+}

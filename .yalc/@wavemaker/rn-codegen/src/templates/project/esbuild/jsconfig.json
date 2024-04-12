@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "expo-web-browser": ["./node_modules/expo-web-browser"],
+      "react": ["../node_modules/react"],
+      "react-native": ["../node_modules/react-native-web"],
+      "react-native-web/src/*": ["../node_modules/react-native-web/dist/*"],
+      "@wavemaker/app-rn-runtime/*": ["../node_modules/@wavemaker/app-rn-runtime/*"],
+      "@wavemaker/variables/*": ["../node_modules/@wavemaker/variables/*"],
+      "@wavemaker/rn-codegen/*": ["../node_modules/@wavemaker/rn-codegen/*"]
+    }
+  }
+}

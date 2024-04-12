@@ -1,0 +1,6 @@
+@import 'variables.less';
+.defineVariables();
+{{#each components}}
+@import '{{this}}';
+{{/each}}
+@import (optional) '../custom/styles.less';

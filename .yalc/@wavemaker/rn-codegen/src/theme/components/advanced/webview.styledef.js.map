@@ -1,0 +1,1 @@
+{"version":3,"file":"webview.styledef.js","sourceRoot":"","sources":["../../../../../src/theme/components/advanced/webview.styledef.ts"],"names":[],"mappings":";;AAEA,kBAAe;IACX,YAAY,EAAE,GAAG,EAAE,CAAC,CAAC,CAAC;YAClB,SAAS,EAAE,cAAc;YACzB,eAAe,EAAE,kBAAkB;YACnC,mBAAmB,EAAE,EAAE;YACvB,KAAK,EAAE,EAAE;SACZ,CAAC,CAAC;CACY,CAAC"}

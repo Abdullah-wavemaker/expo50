@@ -1,0 +1,8 @@
+{{{script}}}
+
+Object.keys(WM_CUSTOM_FORMATTERS).forEach(k => {
+    const formatter = WM_CUSTOM_FORMATTERS[k];
+    formatter.format = formatter.formatter;
+});
+
+export default WM_CUSTOM_FORMATTERS;

@@ -1,0 +1,1 @@
+{"version":3,"names":[],"sources":["contacts-service.ts"],"sourcesContent":["import { Input } from '@wavemaker/app-rn-runtime/variables/device/operation.provider';\n\nexport interface ContactsInput extends Input {\n  contactFilter: string;\n}\n\nexport interface ContactsService {\n  getContacts: (params: ContactsInput) => any;\n}\n"],"mappings":""}

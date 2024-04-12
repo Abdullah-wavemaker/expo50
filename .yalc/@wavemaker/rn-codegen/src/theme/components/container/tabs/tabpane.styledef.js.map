@@ -1,0 +1,1 @@
+{"version":3,"file":"tabpane.styledef.js","sourceRoot":"","sources":["../../../../../../src/theme/components/container/tabs/tabpane.styledef.ts"],"names":[],"mappings":";;AAEA,kBAAe;IACX,YAAY,EAAE,GAAG,EAAE,CAAC,CAAC,CAAC;YAClB,SAAS,EAAE,cAAc;YACzB,eAAe,EAAE,kBAAkB;YACnC,mBAAmB,EAAE,gCAAgC;YACrD,KAAK,EAAE;gBACH,kBAAkB,EAAE,oBAAoB;aAC3C;SACJ,CAAC,CAAC;CACY,CAAC"}

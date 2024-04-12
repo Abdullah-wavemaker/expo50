@@ -1,0 +1,1 @@
+{"version":3,"names":["WmBarChartProps","WmColumnChartProps"],"sources":["column-chart.props.ts"],"sourcesContent":["import WmBarChartProps from \"@wavemaker/app-rn-runtime/components/chart/bar-chart/bar-chart.props\";\n\nexport default class WmColumnChartProps extends WmBarChartProps {\n}\n"],"mappings":"AAAA,OAAOA,eAAe,MAAM,sEAAsE;AAElG,eAAe,MAAMC,kBAAkB,SAASD,eAAe,CAAC"}

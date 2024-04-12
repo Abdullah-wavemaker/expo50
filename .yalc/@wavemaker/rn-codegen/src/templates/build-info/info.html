@@ -1,0 +1,64 @@
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WaveMaker Preview</title>
+    <style>
+        .show {
+            opacity: 0;
+        }
+
+        .hide {
+            opacity: 0;
+        }
+    </style>
+</head>
+
+<body style="height: 100vh; display: flex; padding: 16px;
+                justify-content: center; flex-direction: column;
+                font-family:Arial, Helvetica, sans-serif;
+                background-color: #111; color: #f4f4f4;line-height: 24px;overflow: hidden;">
+    <div>
+        <b style="color: #82d3e0;">1.</b> Studio web preview is disabled. To enable, visit Project Settings.<br>
+        <b style="color: #82d3e0;">2.</b> Otherwise, execute the following command in your local terminal.
+        <br>
+    </div>
+    <div>
+        <div style="position: relative;background-color: #ccc;color: #333; padding: 24px 16px 16px 16px;
+                        border-radius: 8px; font-family:monospace, 'Courier New', Courier;overflow: auto;margin: 8px 0;">
+            <div style="position: absolute;top: 0; right: 0; background: #666; padding: 2px 8px; color: #82d3e0;" onclick="copy()">Copy</div>
+            <div id="command-info" style="word-break: break-word;"></div>
+        </div>
+    </div>
+    <div>
+        <b style="color: #82d3e0;">3.</b> Then, open <a style="color: #82d3e0;" href="http://localhost:19009" target="_blank">http://localhost:19009</a> in a web browser.
+        <br><span><br><br><br><i style="color: #eee;">To know more, <a
+          href="https://docs.wavemaker.com/learn/react-native/generate-web-preview-locally" target="_blank"
+          style="color: #82d3e0;">please visit this link</a>.</i></span>
+        <span style="display:none">Modified at : {{modified_date}}</span>
+    </div>
+    <div id="message" style="position: fixed; top: 0; right: 0; 
+    background: #eee; color: #666; padding: 16px; left: 0; 
+    margin: 4pt; border-radius: 4pt;transition: opacity linear 1s;" class="hide">
+        Copied !!!
+    </div>
+    <script>
+        var div = document.getElementById('command-info');
+
+        function copy() {
+            // Copy the text inside the text field
+            navigator.clipboard.writeText(div.innerText);
+            document.getElementById('message').classList.remove('hide');
+        }
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == XMLHttpRequest.DONE) {
+                div.innerText = `wm-reactnative run web-preview "${location.href.split('/rn-bundle')[0]}#${xhr.responseText.split(';')[0]}"`;
+            }
+        }
+        xhr.open('GET', '/studio/services/auth/token', true);
+        xhr.send(null);
+    </script>
+</body>
+
+</html>

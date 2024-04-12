@@ -1,0 +1,53 @@
+{
+    "baseFont" : "Roboto",
+    "fonts" : [
+        {
+            "name": "Roboto",
+            "path": "./Roboto/Roboto-Regular.ttf"
+        },
+        {
+            "name": "Roboto-Italic",
+            "path": "./Roboto/Roboto-Italic.ttf"
+        },
+        {
+            "name": "Roboto-Black",
+            "path": "./Roboto/Roboto-Italic.ttf"
+        },
+        {
+            "name": "Roboto-BlackItalic",
+            "path": "./Roboto/Roboto-BlackItalic.ttf"
+        },
+        {
+            "name": "Roboto-Bold",
+            "path": "./Roboto/Roboto-Bold.ttf"
+        },
+        {
+            "name": "Roboto-Boldtalic",
+            "path": "./Roboto/Roboto-BoldItalic.ttf"
+        },
+        {
+            "name": "Roboto-Light",
+            "path": "./Roboto/Roboto-Light.ttf"
+        },
+        {
+            "name": "Roboto-LightItalic",
+            "path": "./Roboto/Roboto-LightItalic.ttf"
+        },
+        {
+            "name": "Roboto-Medium",
+            "path": "./Roboto/Roboto-Medium.ttf"
+        },
+        {
+            "name": "Roboto-MediumItalic",
+            "path": "./Roboto/Roboto-MediumItalic.ttf"
+        },
+        {
+            "name": "Roboto-Thin",
+            "path": "./Roboto/Roboto-Thin.ttf"
+        },
+        {
+            "name": "Roboto-ThinItalic",
+            "path": "./Roboto/Roboto-ThinItalic.ttf"
+        }
+    ]
+}

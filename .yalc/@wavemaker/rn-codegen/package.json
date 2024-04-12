@@ -1,0 +1,59 @@
+{
+  "name": "@wavemaker/rn-codegen",
+  "version": "1.0.0-dev",
+  "description": "",
+  "main": "index.js",
+  "bin": {
+    "wm-rn-codegen": "./index.js"
+  },
+  "scripts": {
+    "build": "node scripts/build.js build",
+    "transpile": "node ./build/index.js",
+    "test": "jest build/test",
+    "watch": "npm-watch build",
+    "publish-patch": "node scripts/npm-publish.js publish"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@angular/compiler": "^12.2.1",
+    "@babel/generator": "^7.13.9",
+    "@babel/parser": "^7.13.11",
+    "@babel/traverse": "^7.13.0",
+    "@types/lodash": "^4.14.191",
+    "@types/node": "^18.11.10",
+    "@types/prettier": "^2.7.1",
+    "@types/yargs": "^17.0.15",
+    "adm-zip": "^0.5.9",
+    "axios": "^1.2.0",
+    "clean-css": "^5.1.5",
+    "color": "^4.2.3",
+    "css-to-react-native-transform": "^1.9.0",
+    "css-tree": "^2.1.0",
+    "execa": "^5.0.0",
+    "fs-extra": "^9.1.0",
+    "handlebars": "^4.7.7",
+    "html-entities": "^2.3.2",
+    "less": "^4.1.1",
+    "lodash": "^4.17.21",
+    "node-html-parser": "^5.0.0",
+    "prettier": "^2.3.0",
+    "puppeteer": "^5.4.0",
+    "rimraf": "^3.0.2",
+    "yargs": "^16.2.0"
+  },
+  "watch": {
+    "build": {
+      "patterns": [
+        "src"
+      ],
+      "extensions": "*",
+      "ignore": "src/vendor/external.min.js",
+      "quiet": true,
+      "legacyWatch": true,
+      "delay": 2500,
+      "runOnChangeOnly": true
+    }
+  },
+  "yalcSig": "50dac396e7dd366a6f50c8ada1f14cf5"
+}

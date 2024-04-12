@@ -1,0 +1,41 @@
+{
+    "expo": {
+        "androidStatusBar": {
+            "backgroundColor": "#000000",
+            "translucent": false,
+            "barStyle": "dark-content"
+        },
+        "name": "unknown",
+        "slug": "unknown",
+        "version": "0.0.1",
+        "jsEngine": "hermes",
+        "orientation": "portrait",
+        "icon": "./assets/resources/assets/icon.png",
+        "splash": {
+            "image": "./assets/resources/assets/splash.png",
+            "resizeMode": "cover"
+        },
+        "updates": {
+            "fallbackToCacheTimeout": 0
+        },
+        "assetBundlePatterns": [
+            "**/*"
+        ],
+        "ios": {
+            "backgroundColor": "#007bff",
+            "supportsTablet": true,
+            "bundleIdentifier": "com.unknown"
+        },
+        "android": {
+            "softwareKeyboardLayoutMode": "pan",
+            "adaptiveIcon": {
+                "foregroundImage": "./assets/resources/assets/icon.png"
+            },
+            "package": "com.unknown"
+        },
+        "web": {
+            "bundler": "metro",
+            "favicon": "./assets/favicon.png"
+        }
+    }
+}
